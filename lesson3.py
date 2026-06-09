@@ -10,7 +10,7 @@ def login():
             return True
 
         trials -= 1
-        print("Wrong PIN ❌")
+        print("Wrong PIN ")
 
         if trials > 0:
             print("Attempts left:", trials)
