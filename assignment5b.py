@@ -4,68 +4,73 @@ class Bank:
         self.correctpin = "1234"
         self.trials = 3
 
+
 class Account(Bank):
     def __init__(self):
-        super().__init__(self,self.balance, self.correctpin, self.trials)
+        super().__init__()
 
-        # self.amount = amount
-    def authentication (self):
+    def authentication(self):
         while self.trials > 0:
             pin = input("Enter your pin: ")
 
             if pin == self.correctpin:
                 print("Welcome!")
-                return  True
+                return True
             else:
-                self.trials -=1
+                self.trials -= 1
                 if self.trials > 0:
-                    print("Wrong pin. Try again:")
+                    print("Wrong pin. Try again.")
                 else:
                     print("Access Denied")
+
         return False
 
     def check_balance(self):
         print(f"Balance is {self.balance}")
 
-    def deposit(self,amount):
+    def deposit(self, amount):
         if amount > 0:
             self.balance += amount
-            print(f"Withdrawal successful. New balance{self.balance}")
-        else :
-            print("Invalid Input")
+            print(f"Deposit successful. New balance is {self.balance}")
+        else:
+            print("Invalid input")
 
-    def withdraw (self,amount):
-        if amount>0 and amount < self.balance :
+    def withdraw(self, amount):
+        if amount > 0 and amount <= self.balance:
             self.balance -= amount
             print(f"Withdrawal successful. New balance is {self.balance}")
-        else :
-            print("Invalid input.")
+        else:
+            print("Insufficient balance")
 
-   
-    
-    def Menu (self):
+    def menu(self):
         while True:
-            print("1. Check balance")
+            print("\n1. Check Balance")
             print("2. Withdraw")
             print("3. Deposit")
             print("4. Exit")
 
-            choice = input("Enter option:")
+            choice = input("Enter option: ")
 
             if choice == "1":
-                self.check_balance ()
+                self.check_balance()
+
             elif choice == "2":
-                amount = float(input("Enter your amount: "))
+                amount = float(input("Enter amount: "))
                 self.withdraw(amount)
+
             elif choice == "3":
-                amount = float(input("Enter your amount: "))
+                amount = float(input("Enter amount: "))
                 self.deposit(amount)
-            elif choice =="4":
-                print("Thank you fo choosing us!")
+
+            elif choice == "4":
+                print("Thank you for choosing us!")
                 break
 
             else:
-                print("Invalid input.")
-atm = Account
-if atm.authentication == True:
-    atm.Menu()
+                print("Invalid input")
+
+
+atm = Account()
+
+if atm.authentication():
+    atm.menu()
